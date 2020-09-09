@@ -16,10 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+<<<<<<< HEAD
 from twitteruser import views
 from tweet import views
 from authentication import views
 # https://stackoverflow.com/questions/56351141/why-i-have-issues-in-importing-views-in-the-urls-py-file
+=======
+from twitteruser.views import index_view, tweet_view, userprofile_view, follow_view, unfollow_view, notifications_view
+from tweet.views import addtweet_view
+
+>>>>>>> 7ecd3005235238da45fa89d14e61070a8377bfc2
 
 urlpatterns = [
     path('', views.index_view, name='homepage'),

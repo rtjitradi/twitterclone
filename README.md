@@ -165,3 +165,60 @@ No Marks
 Total Points: 35.0
 
 THANKS FOR THE STUDY HALLS AND ESPECIALLY TO HOWARD FOR THE GUIDANCE.
+
+
+
+***Note: This material will be needed for your Capstone Project***
+
+In Django, we've been purely focused on working with function-based views -- frankly, because they're easy and they get the job done. But sometimes we need to eke just a little more functionality out a view... especially if we need to be able to take in different methods (GET, POST, etc.). We can do that inside of a function, but what if there was a way to make it cleaner and easier to understand?
+
+Welcome to Django's class-based views. Building on Python's amazingly powerful inheritance system, a class-based view allows us to have standalone views, make classes of helper functions that can be easily used in multiple views (called mixins (Links to an external site.)Links to an external site.), and separate out exactly how our views should work depending on how they're requested.
+
+Start here: https://docs.djangoproject.com/en/3.0/topics/class-based-views/intro/ (Links to an external site.)Links to an external site. 
+
+Additional reading:
+
+* https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-display/
+ (Links to an external site.)Links to an external site.* https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-editing/
+ (Links to an external site.)Links to an external site.* https://www.codementor.io/jamesezechukwu/working-with-class-based-views-in-django-5zkjnrvwc (Links to an external site.)Links to an external site.
+
+Your Task
+Go through your Twitterclone project and identify 4 view functions (ideally including at least one form view) and convert them from function-based views to class-based views. Work in a branch and submit a link to a PR back to your primary branch.
+
+Demo Video: https://s3.us-east-2.amazonaws.com/videos.kenzie.academy/Software+Engineering+-+Python/2020-03-06+--+class+based+views6.mp4 (Links to an external site.)Links to an external site.
+
+ 
+
+Submission
+Work in a dev branch and submit a link to a PR back to your master branch.
+
+For example:
+
+https://github.com/<github_username>/twitterclone/pull/1
+Rubric
+Just Another Rubric in the Wall
+Just Another Rubric in the Wall
+Criteria	Ratings	Pts
+This criterion is linked to a Learning OutcomeConverted 4 function-based views of student's choice into class-based views
+8.0 pts
+Full Marks
+All class-based views retain the same functionality as function-based views. All views are functional.
+0.0 pts
+No Marks
+Views are not converted at all.
+8.0 pts
+This criterion is linked to a Learning OutcomeOne converted function is a form view
+1.0 pts
+Full Marks
+GET and POST requests are handled appropriately.
+0.0 pts
+No Marks
+None of the converted views is a form view.
+1.0 pts
+This criterion is linked to a Learning OutcomeRepo contains pyproject.toml that includes all necessary dependencies to run application
+1.0 pts
+Full Marks
+0.0 pts
+No Marks
+1.0 pts
+Total Points: 10.0
