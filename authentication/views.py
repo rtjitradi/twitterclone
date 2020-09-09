@@ -33,6 +33,7 @@ def login_view(request):
             if user:
                 login(request, user)
                 return HttpResponseRedirect(request.GET.get('next', reverse('homepage')))
+
         form = LoginForm()
         return render(request, 'generic_form.html', {'form': form})
 

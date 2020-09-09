@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block content %}
+
+<form action="" method="POST">
+    {% csrf_token %} {{ form.as_p }}
+    <input type="submit" value="Submit!">
+</form>
+<br>
+<br> {% if request.path == '/login/' %}
+<h3>Please click <a href="/signup/">signup</a> to be a member and enjoy TwitterClone</h3>
+{% endif %} {% endblock %}

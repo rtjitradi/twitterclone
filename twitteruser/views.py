@@ -29,7 +29,7 @@ def index_view(request):
 def tweet_view(request, tweet_id):
     tweet = the_tweet(tweet_id)
     return render(request, 'index.html', {
-        'page_title': 'TwitterClone: All Tweets',
+        'page_title': 'TwitterClone: Tweet Details',
         'template_name': 'tweets.html',
         'tweet': tweet
     })

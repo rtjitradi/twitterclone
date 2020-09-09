@@ -11,7 +11,7 @@ class CustomUserAdminModel(UserAdmin):
     model = CustomUserModel
     admin_addform = CustomUserCreationForm
     admin_changeform = CustomUserChangeForm
-    displayfields_list = ['username', 'email',]
+    displayfields_list = ['username', 'email']
     fieldsets = UserAdmin.fieldsets + (('More Details', {'fields': ('follow', )}),)
 
 
