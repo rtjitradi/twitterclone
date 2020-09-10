@@ -1,7 +1,7 @@
 {% for tweet in tweets %}
 <div>
     <h4>{{ tweet.characters }}</h4>
-    <h4><a href="/{{ tweet.user.username }}/">@{{ tweet.user.username }}</a></h4>
+    <h4><a href="/userprofile/{{ tweet.user.username }}/">@{{ tweet.user.username }}</a></h4>
     <h4><a href="/tweetdetails/{{tweet.id}}/">posted: {{ tweet.datetime }}</a></h4>
 </div>
 {% endfor %}
