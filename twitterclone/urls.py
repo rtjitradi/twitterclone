@@ -16,27 +16,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-<<<<<<< HEAD
-from twitteruser import views
-from tweet import views
-from authentication import views
+from twitteruser import views as twitteruserviews
+from tweet import views as tweetviews
+from authentication import views as authenticationviews
 # https://stackoverflow.com/questions/56351141/why-i-have-issues-in-importing-views-in-the-urls-py-file
-=======
-from twitteruser.views import index_view, tweet_view, userprofile_view, follow_view, unfollow_view, notifications_view
-from tweet.views import addtweet_view
-
->>>>>>> 7ecd3005235238da45fa89d14e61070a8377bfc2
 
 urlpatterns = [
-    path('', views.index_view, name='homepage'),
-    path('signup/', views.signup_view, name='signup'),
-    path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
-    path('addtweet/', views.addtweet_view, name='addtweet'),
-    path('tweetdetails/<int:tweet_id>/', views.tweet_view, name='tweetdetails'),
-    path('<str:user_username>/', views.userprofile_view, name='userprofile'),
-    path('notifications/<str:user_username>/', views.notifications_view, name='notifications'),
-    path('<str:user_username>/', views.follow_view, name='follow'),
-    path('<str:user_username>/', views.unfollow_view, name='unfollow'),
+    path('', twitteruserviews.index_view, name='homepage'),
+    path('signup/', authenticationviews.signup_view, name='signup'),
+    path('login/', authenticationviews.login_view, name='login'),
+    path('logout/', authenticationviews.logout_view, name='logout'),
+    path('addtweet/', tweetviews.addtweet_view, name='addtweet'),
+    path('tweetdetails/<int:tweet_id>/', twitteruserviews.tweet_view, name='tweetdetails'),
+    path('<str:user_username>/', twitteruserviews.userprofile_view, name='userprofile'),
+    path('notifications/<str:user_username>/', twitteruserviews.notifications_view, name='notifications'),
+    path('<str:user_username>/', twitteruserviews.follow_view, name='follow'),
+    path('<str:user_username>/', twitteruserviews.unfollow_view, name='unfollow'),
     path('admin/', admin.site.urls),
 ]
