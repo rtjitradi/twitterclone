@@ -19,23 +19,23 @@ def signup_view(request):
             login(request, new_user)
             return HttpResponseRedirect(reverse('homepage'))
 
-        form = SignupForm()
-        return render(request, 'generic_form.html', {'page_title': 'TwitterClone: Signup Form', 'form': form})
+    form = SignupForm()
+    return render(request, 'generic_form.html', {'page_title': 'TwitterClone: Signup Form', 'form': form})
 
 
 def login_view(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            login_data = form.cleaned_data
+            data = form.cleaned_data
             user = authenticate(
-                request, username=login_data.get('username'), password=login_data.get('password'))
+                request, username=data.get('username'), password=data.get('password'))
             if user:
                 login(request, user)
                 return HttpResponseRedirect(request.GET.get('next', reverse('homepage')))
 
-        form = LoginForm()
-        return render(request, 'generic_form.html', {'form': form})
+    form = LoginForm()
+    return render(request, 'generic_form.html', {'form': form})
 
 
 def logout_view(request):
