@@ -12,9 +12,9 @@ def signup_view(request):
         if form.is_valid():
             signup_data = form.cleaned_data
             new_user = CustomUserModel.objects.create(
-                email=signup_data.get('email'),
                 username=signup_data.get('username'),
-                password=signup_data.get('password')
+                password=signup_data.get('password'),
+                # email=signup_data.get('email')
             )
             login(request, new_user)
             return HttpResponseRedirect(reverse('homepage'))

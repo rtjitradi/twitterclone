@@ -28,9 +28,9 @@ urlpatterns = [
     path('logout/', authenticationviews.logout_view, name='logout'),
     path('addtweet/', tweetviews.addtweet_view, name='addtweet'),
     path('tweetdetails/<int:tweet_id>/', twitteruserviews.tweet_view, name='tweetdetails'),
-    path('<str:user_username>/', twitteruserviews.userprofile_view, name='userprofile'),
+    path('userprofile/<str:user_username>/', twitteruserviews.userprofile_view, name='userprofile'),
     path('notifications/<str:user_username>/', twitteruserviews.notifications_view, name='notifications'),
-    path('<str:user_username>/', twitteruserviews.follow_view, name='follow'),
-    path('<str:user_username>/', twitteruserviews.unfollow_view, name='unfollow'),
+    path('follow/<str:user_username>/', twitteruserviews.follow_view, name='follow'),
+    path('unfollow/<str:user_username>/', twitteruserviews.unfollow_view, name='unfollow'),
     path('admin/', admin.site.urls),
 ]

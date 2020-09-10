@@ -26,13 +26,13 @@ def all_tweets(user_details):
     user_list = [user_details.id]
     for user_detail in user_details.follow.all():
         user_list.append(user_detail.id)
-    tweets = CustomUserModel.objects.filter(user__id__in=user_list).order_by('datetime')
+    tweets = TweetModel.objects.filter(user__id__in=user_list).order_by('datetime')
     return tweets
 
 
 def tweets_byuser(user_details):
-    return CustomUserModel.objects.filter(user__id=user_details.id).order_by('datetime')
+    return TweetModel.objects.filter(user__id=user_details.id).order_by('datetime')
 
 
 def count_usertweets(user_details):
-    return CustomUserModel.objects.filter(user__id=user_details.id).count()
+    return TweetModel.objects.filter(user__id=user_details.id).count()
