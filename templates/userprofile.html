@@ -14,16 +14,20 @@
         <br>
         <br>
         <h3>{{ user_details.display_name }} with distinguished handle &#8594 <i>@{{ user_details.username }}</i></h3>
-        {% if request.path == '/' or request.path == '/notifications/' %}
-        <br>
+        <br> {% if request.path == '/' or request.path == '/notifications/' %}
         <h4>Currently has contributed {{ usertweets_count }} and follows {{ follows_count }} TwitterCloners</h4>
         {% else %}
         <!-- https://docs.djangoproject.com/en/3.1/ref/contrib/auth/ -->
         <!-- https://docs.djangoproject.com/en/3.0/ref/templates/builtins/ -->
         {% if request.user.is_authenticated %} {% if request.user != user_details %} {% if user_details in request.user.follow.all %}
         <a href="/{{ user_details.username }}/unfollow/">unfollow</a> {% else %}
-        <a href="/{{ user_details.username }}/follow/">follow</a> {% endif %} {% endif %} {% endif %}
-        <h3>{% include template_name %}</h3>
+        <a href="/{{ user_details.username }}/follow/">follow</a> {% endif %} {% endif %} {% endif %} {% endif %}
+        <br>
+        <h2><a href="/notifications/{{ user_details.username }}/">Notifications</a></h2>
+        <br>
+        <br> {% include template_name %}
+        <br>
+        <h2><a href="/logout/">Logout</a></h2>
     </div>
     {% endblock %}
 </body>
