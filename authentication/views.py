@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth import login, logout, authenticate
+from django.views.generic import TemplateView
 
 from authentication.forms import SignupForm, LoginForm
 from twitteruser.models import CustomUserModel
@@ -38,6 +39,13 @@ def login_view(request):
     return render(request, 'generic_form.html', {'form': form})
 
 
-def logout_view(request):
-    logout(request)
-    return HttpResponseRedirect(reverse('homepage'))
+# def logout_view(request):
+#     logout(request)
+#     return HttpResponseRedirect(reverse('homepage'))
+
+
+class LogoutView(TemplateView):
+
+    def get(self, request):
+        logout(request)
+        return HttpResponseRedirect(reverse('homepage'))

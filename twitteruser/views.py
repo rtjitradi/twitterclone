@@ -4,8 +4,10 @@ from tweet.organizer import the_tweet, all_tweets, tweets_byuser, count_usertwee
 from notification.organizer import all_notifications, delete_notification, count_notifications
 
 from django.shortcuts import render, HttpResponseRedirect, reverse
-from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Thank you for the study halls. Special thanks to Matt and Howard for the guidance.
 # Create your views here.
@@ -27,44 +29,90 @@ def index_view(request):
     })
 
 
-def tweet_view(request, tweet_id):
-    tweet = the_tweet(tweet_id)
-    return render(request, 'index.html', {
-        'page_title': 'TwitterClone: Tweet Details',
-        'template_name': 'tweets.html',
-        'tweet': tweet
-    })
+# def tweet_view(request, tweet_id):
+#     tweet = the_tweet(tweet_id)
+#     return render(request, 'index.html', {
+#         'page_title': 'TwitterClone: Tweet Details',
+#         'template_name': 'tweets.html',
+#         'tweet': tweet
+#     })
 
 
-def userprofile_view(request, user_username):
-    user_details = CustomUserModel.objects.get(username=user_username)
-    tweets = all_tweets(user_details)
-    follows_count = user_details.follow.all().count()
-    usertweets_count = count_usertweets(user_details)
-    notifications_count = count_notifications(user_details)
-    return render(request, 'userprofile.html', {
-        'page_title': 'TwitterClone: User Profile',
-        'template_name': 'tweets.html',
-        'user_details': user_details,
-        'tweets': tweets,
-        'follows_count': follows_count,
-        'usertweets_count': usertweets_count,
-        'notifications_count': notifications_count
-    })
+class PostTweetView(TemplateView):
+
+    def get(self, request, tweet_id):
+        tweet = the_tweet(tweet_id)
+        return render(request, 'index.html', {
+            'page_title': 'TwitterClone: Tweet Details',
+            'template_name': 'tweets.html',
+            'tweet': tweet
+        })
 
 
-@login_required
-def follow_view(request, user_username):
-    user = CustomUserModel.objects.get(username=user_username)
-    request.user.follow.add(user)
-    return HttpResponseRedirect(reverse('homepage'))
+# def userprofile_view(request, user_username):
+#     user_details = CustomUserModel.objects.get(username=user_username)
+#     tweets = all_tweets(user_details)
+#     follows_count = user_details.follow.all().count()
+#     usertweets_count = count_usertweets(user_details)
+#     notifications_count = count_notifications(user_details)
+#     return render(request, 'userprofile.html', {
+#         'page_title': 'TwitterClone: User Profile',
+#         'template_name': 'tweets.html',
+#         'user_details': user_details,
+#         'tweets': tweets,
+#         'follows_count': follows_count,
+#         'usertweets_count': usertweets_count,
+#         'notifications_count': notifications_count
+#     })
 
 
-@login_required
-def unfollow_view(request, user_username):
-    user = CustomUserModel.objects.get(username=user_username)
-    request.user.follow.remove(user)
-    return HttpResponseRedirect(reverse('homepage'))
+class UserProfileView(TemplateView):
+
+    def get(self, request, user_username):
+        user_details = CustomUserModel.objects.get(username=user_username)
+        tweets = all_tweets(user_details)
+        follows_count = user_details.follow.all().count()
+        usertweets_count = count_usertweets(user_details)
+        notifications_count = count_notifications(user_details)
+        return render(request, 'userprofile.html', {
+            'page_title': 'TwitterClone: User Profile',
+            'template_name': 'tweets.html',
+            'user_details': user_details,
+            'tweets': tweets,
+            'follows_count': follows_count,
+            'usertweets_count': usertweets_count,
+            'notifications_count': notifications_count
+        })
+
+
+# @login_required
+# def follow_view(request, user_username):
+#     user = CustomUserModel.objects.get(username=user_username)
+#     request.user.follow.add(user)
+#     return HttpResponseRedirect(reverse('homepage'))
+
+
+class FollowView(LoginRequiredMixin, TemplateView):
+
+    def get(self, request, user_username):
+        user = CustomUserModel.objects.get(username=user_username)
+        request.user.follow.add(user)
+        return HttpResponseRedirect(reverse('homepage'))
+
+
+# @login_required
+# def unfollow_view(request, user_username):
+#     user = CustomUserModel.objects.get(username=user_username)
+#     request.user.follow.remove(user)
+#     return HttpResponseRedirect(reverse('homepage'))
+
+
+class UnfollowView(LoginRequiredMixin, TemplateView):
+
+    def get(self, request, user_username):
+        user = CustomUserModel.objects.get(username=user_username)
+        request.user.follow.remove(user)
+        return HttpResponseRedirect(reverse('homepage'))
 
 
 def notifications_view(request, user_username):
@@ -92,3 +140,29 @@ def notifications_view(request, user_username):
         'notification_delete': notification_delete,
         'notification_count': notifications_count
     })
+
+
+# class NotificationsView(TemplateView):
+
+#     def filter(self, request, user_username):
+#         notifiers = NotificationModel.objects.filter(user_notification=request.user).filter(new_notification=True)
+#         for notifier in notifiers:
+#             notifier.new_notification = False
+#         user_details = CustomUserModel.objects.get(username=user_username)
+#         follows_count = user_details.follow.all().count()
+#         tweets = tweets_byuser(user_details)
+#         usertweets_count = count_usertweets(user_details)
+#         notifications_all = all_notifications(user_details)
+#         notification_delete = delete_notification(user_details)
+#         notifications_count = count_notifications(user_details)
+#         return render(request, 'index.html', {
+#             'page_title': 'TwitterClone: Notifications',
+#             'template_name': 'notifications.html',
+#             'user_details': user_details,
+#             'follows_count': follows_count,
+#             'tweets': notifiers,
+#             'usertweets_count': usertweets_count,
+#             'notification_all': notifications_all,
+#             'notification_delete': notification_delete,
+#             'notification_count': notifications_count
+#         })
