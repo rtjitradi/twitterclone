@@ -1,7 +1,9 @@
 {% for tweet in tweets %}
 <div>
-    <h4>{{ tweet.characters }}</h4>
-    <h4><a href="/userprofile/{{ tweet.user.username }}/">@{{ tweet.user.username }}</a></h4>
-    <h4><a href="/tweetdetails/{{tweet.id}}/">posted: {{ tweet.datetime }}</a></h4>
+    <br>
+    <h4><a href="/tweetdetails/{{ tweet.id }}">Tweet #{{ tweet.id }}: {{ tweet.characters }}</a></h4>
+    <h4><a href="/userprofile/{{ tweet.user.username }}/">By: @{{ tweet.user.username }}</a></h4>
+    <h5><i><a href="/tweetdetails/{{tweet.id}}/">Posted On: {{ tweet.datetime }}</a></i></h5>
+    <br>
 </div>
 {% endfor %}

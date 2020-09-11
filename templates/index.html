@@ -1,3 +1,5 @@
+<!-- username: reggy / password: asdf -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,21 +15,23 @@
         <h1><b>{{ page_title }}</b></h1>
         <br>
         <br>
-        <h3>{{ user_details.display_name }} with distinguished handle &#8594 <i>@{{ user_details.username }}</i></h3>
-        <br> {% if request.path == '/' or request.path == '/notifications/' %}
-        <h4>Currently has contributed {{ usertweets_count }} and follows {{ follows_count }} TwitterCloners</h4>
+        <h3>{{ user_details.display_name }} Member's Profile Click&#8594 <a href="/userprofile/{{ user_details.username }}/"><button>@{{ user_details.username }}</button></a></h3>
+        {% if request.path == '/' or request.path == '/notifications/' %}
+        <h3>Currently has contributed {{ usertweets_count }} tweet(s) and follows {{ follows_count }} TwitterCloner(s)</h3>
         {% else %}
         <!-- https://docs.djangoproject.com/en/3.1/ref/contrib/auth/ -->
         <!-- https://docs.djangoproject.com/en/3.0/ref/templates/builtins/ -->
         {% if request.user.is_authenticated %} {% if request.user != user_details %} {% if user_details in request.user.follow.all %}
-        <a href="/{{ user_details.username }}/unfollow/">unfollow</a> {% else %}
-        <a href="/{{ user_details.username }}/follow/">follow</a> {% endif %} {% endif %} {% endif %} {% endif %}
+        <h3><a href="/{{ user_details.username }}/unfollow/">unfollow</a></h3> {% else %}
+        <h3><a href="/{{ user_details.username }}/follow/">follow</a></h3> {% endif %} {% endif %} {% endif %} {% endif %}
         <br>
-        <h2><a href="/notifications/{{ user_details.username }}/">Notifications</a></h2>
+        <h3><a href="/notifications/{{ user_details.username }}/">Notifications For: {{ user_details.username }}</a></h3>
         <br>
+        <h3><a href="/addtweet/">Create New Tweet</a></h3>
         <br> {% include template_name %}
         <br>
-        <h2><a href="/logout/">Logout</a></h2>
+        <br>
+        <h3>Have to do something else? Please be safe and click <a href="/logout/">Logout</a></h3>
     </div>
     {% endblock %}
 </body>
